@@ -16,7 +16,10 @@ export const links: LinksFunction = () => [];
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="sv" className="bg-amber-50 text-amber-900 dark:bg-stone-900 dark:text-amber-100">
+    <html
+      lang="sv"
+      className="bg-amber-50 text-amber-900 dark:bg-stone-900 dark:text-amber-100"
+    >
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

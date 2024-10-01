@@ -9,7 +9,7 @@ export const meta: MetaFunction = () => {
     { title: APP_NAME },
     { name: "description", content: "Finske slektsnavn fra Finnskogen" },
   ];
-}
+};
 
 export async function loader({ request, context }: LoaderFunctionArgs) {
   const side = new URL(request.url).searchParams.get("side");
