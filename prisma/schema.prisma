@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Slektsnavn {
+  indeks Int @id
+  forstaAar String?
+  sistaAar String?
+  finskSlekt String?
+  fornamn String?
+  patronym String?
+  slektbelaegg String?
+  ort String?
+  nuvarandeSocken String?
+  laen String?
+  arkivkaella String?
+  kaellspecifikation String?
+  andrekaella String?
+  uppgiftslaemnare String?
+  kommentarer String?
+}
+
+// Indeks
+// Första år
+// Sista år
+// Finsk släkt
+// Förnamn
+// Efternamn
+// Släktbelägg
+// Ort
+// Nuv. Socken
+// Län
+// Arkivkälla
+// Källspecifikation
+// 2:a källa
+// Uppg.-lämn
+// Kommentarer

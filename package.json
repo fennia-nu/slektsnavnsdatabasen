@@ -1,8 +1,11 @@
 {
-  "name": "slektsnavn-cf",
+  "name": "slektsnavn",
   "private": true,
   "sideEffects": false,
   "type": "module",
+  "prisma": {
+    "seed": "bun run ./prisma/import-csv.ts"
+  },
   "scripts": {
     "build": "remix vite:build",
     "deploy": "bun run build && wrangler pages deploy",
@@ -12,19 +15,27 @@
     "typecheck": "tsc",
     "typegen": "wrangler types",
     "preview": "bun run build && wrangler pages dev",
-    "cf-typegen": "wrangler types"
+    "cf-typegen": "wrangler types",
+    "dump-db": "sqlite3 ./prisma/slektsnavn.db .dump > migrations/dump.sql",
+    "d1-seed:local": "wrangler d1 execute slektsnavn --local --file=migrations/dump.sql",
+    "d1-seed:remote": "wrangler d1 execute slektsnavn --remote --file=migrations/dump.sql",
+    "d1-migrate:local": "wrangler d1 migrations apply slektsnavn --local",
+    "d1-migrate:remote": "wrangler d1 migrations apply slektsnavn --remote"
   },
   "dependencies": {
-    "@remix-run/cloudflare": "^2.12.0",
-    "@remix-run/cloudflare-pages": "^2.12.0",
-    "@remix-run/react": "^2.12.0",
+    "@prisma/adapter-d1": "^5.20.0",
+    "@prisma/client": "5.20.0",
+    "@remix-run/cloudflare": "2.12.0",
+    "@remix-run/cloudflare-pages": "2.12.0",
+    "@remix-run/react": "2.12.0",
     "isbot": "^4.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240925.0",
-    "@remix-run/dev": "^2.12.0",
+    "@remix-run/dev": "2.12.0",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
@@ -37,11 +48,12 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "postcss": "^8.4.38",
+    "prisma": "^5.20.0",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.1.6",
     "vite": "^5.1.0",
     "vite-tsconfig-paths": "^4.2.1",
-    "wrangler": "3.57.1"
+    "wrangler": "^3.78.12"
   },
   "engines": {
     "node": ">=20.0.0"
