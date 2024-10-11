@@ -1,0 +1,195 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "6",
+  "dialect": "sqlite",
+  "tables": {
+    "_prisma_migrations": {
+      "name": "_prisma_migrations",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "checksum": {
+          "autoincrement": false,
+          "name": "checksum",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "finished_at": {
+          "autoincrement": false,
+          "name": "finished_at",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "migration_name": {
+          "autoincrement": false,
+          "name": "migration_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "logs": {
+          "autoincrement": false,
+          "name": "logs",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rolled_back_at": {
+          "autoincrement": false,
+          "name": "rolled_back_at",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "started_at": {
+          "default": "(current_timestamp)",
+          "autoincrement": false,
+          "name": "started_at",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "applied_steps_count": {
+          "default": 0,
+          "autoincrement": false,
+          "name": "applied_steps_count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "Slektsnavn": {
+      "name": "Slektsnavn",
+      "columns": {
+        "indeks": {
+          "autoincrement": true,
+          "name": "indeks",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "forstaAar": {
+          "autoincrement": false,
+          "name": "forstaAar",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sistaAar": {
+          "autoincrement": false,
+          "name": "sistaAar",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "finskSlekt": {
+          "autoincrement": false,
+          "name": "finskSlekt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fornamn": {
+          "autoincrement": false,
+          "name": "fornamn",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "patronym": {
+          "autoincrement": false,
+          "name": "patronym",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "slektbelaegg": {
+          "autoincrement": false,
+          "name": "slektbelaegg",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ort": {
+          "autoincrement": false,
+          "name": "ort",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nuvarandeSocken": {
+          "autoincrement": false,
+          "name": "nuvarandeSocken",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "laen": {
+          "autoincrement": false,
+          "name": "laen",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "arkivkaella": {
+          "autoincrement": false,
+          "name": "arkivkaella",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "kaellspecifikation": {
+          "autoincrement": false,
+          "name": "kaellspecifikation",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "andrekaella": {
+          "autoincrement": false,
+          "name": "andrekaella",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "uppgiftslaemnare": {
+          "autoincrement": false,
+          "name": "uppgiftslaemnare",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "kommentarer": {
+          "autoincrement": false,
+          "name": "kommentarer",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}
