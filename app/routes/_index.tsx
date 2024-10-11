@@ -1,8 +1,11 @@
-import { json, LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
 import { twMerge } from "tailwind-merge";
 import { Form, Link, useLoaderData } from "@remix-run/react";
-import { getDb } from "~/db.server";
 import { APP_NAME } from "./manifest[.json]";
+import { json, LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
+import { drizzle } from "drizzle-orm/bun-sqlite";
+import { Database } from "bun:sqlite";
+import * as schema from "drizzle/schema";
+import { count } from "drizzle-orm";
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,19 +14,25 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export async function loader({ request, context }: LoaderFunctionArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   const side = new URL(request.url).searchParams.get("side");
 
-  const TAKE = 50;
-  const db = getDb(context.cloudflare.env.DB);
-  const rows = await db.slektsnavn.count();
-  const lastPage = Math.ceil(rows / TAKE);
+  const LIMIT = 50;
+  const sqlite = new Database(process.env.DB_FILE_NAME!);
+  const db = drizzle(sqlite, { schema });
+  const rows =
+    (
+      await db
+        .select({ count: count(schema.slektsnavn.indeks) })
+        .from(schema.slektsnavn)
+    )[0].count ?? 0;
+  const lastPage = Math.ceil(rows / LIMIT);
   const page = clamp(Number(side) - 1 || 0, lastPage);
-  const cursor = TAKE * page + 1;
+  const cursor = LIMIT * page + 1;
 
-  const slektsnavn = await db.slektsnavn.findMany({
-    take: TAKE,
-    cursor: { indeks: cursor },
+  const slektsnavn = await db.query.slektsnavn.findMany({
+    limit: LIMIT,
+    offset: cursor,
   });
   return json({
     slektsnavn,

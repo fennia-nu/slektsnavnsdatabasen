@@ -7,15 +7,16 @@
     "seed": "bun run ./prisma/import-csv.ts"
   },
   "scripts": {
-    "build": "remix vite:build",
+    "build": "bunx --bun remix vite:build",
     "dev": "remix vite:dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
-    "start": "wrangler pages dev ./build/client",
+    "start": "bunx --bun remix-serve build/server/index.js",
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@remix-run/node": "^2.12.1",
     "@remix-run/react": "2.12.0",
-    "better-sqlite3": "^11.3.0",
+    "@remix-run/serve": "^2.12.1",
     "drizzle-orm": "^0.33.0",
     "isbot": "^4.1.0",
     "prettier": "3.3.3",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@remix-run/dev": "2.12.0",
+    "@types/bun": "^1.1.11",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^8.8.0",
