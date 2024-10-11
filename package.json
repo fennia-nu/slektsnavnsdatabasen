@@ -7,11 +7,14 @@
     "seed": "bun run ./prisma/import-csv.ts"
   },
   "scripts": {
-    "build": "bunx --bun remix vite:build",
+    "build": "bunx --bun remix vite:build && bun run db:migrate && bun run db:seed",
     "dev": "remix vite:dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "bunx --bun remix-serve build/server/index.js",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "db:seed": "bun ./drizzle/seed.ts",
+    "db:migrate": "bunx drizzle-kit migrate --config drizzle.config.ts",
+    "db:generate": "bunx drizzle-kit generate --config drizzle.config.ts"
   },
   "dependencies": {
     "@remix-run/node": "^2.12.1",
@@ -32,6 +35,7 @@
     "@typescript-eslint/eslint-plugin": "^8.8.0",
     "@typescript-eslint/parser": "^8.8.0",
     "autoprefixer": "^10.4.19",
+    "better-sqlite3": "^11.3.0",
     "drizzle-kit": "^0.24.2",
     "eslint": "^9.11.1",
     "eslint-config-prettier": "^9.1.0",

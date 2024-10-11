@@ -1,6 +1,3 @@
--- Current sql file was generated after introspecting the database
--- If you want to run this migration please uncomment this code before executing migrations
-/*
 CREATE TABLE `_prisma_migrations` (
 	`id` text PRIMARY KEY NOT NULL,
 	`checksum` text NOT NULL,
@@ -29,5 +26,3 @@ CREATE TABLE `Slektsnavn` (
 	`uppgiftslaemnare` text,
 	`kommentarer` text
 );
-
-*/

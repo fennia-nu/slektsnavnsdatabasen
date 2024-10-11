@@ -1,10 +1,13 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { Database } from "bun:sqlite";
+import { drizzle } from "drizzle-orm/bun-sqlite";
+import * as schema from "./schema";
 
 const raw = Bun.file(
   new URL(`${import.meta.url}/../../slektsnavnsbasen-20120726.csv`),
 );
 
-const prisma = new PrismaClient();
+const sqlite = new Database(process.env.DB_FILE_NAME);
+const db = drizzle(sqlite, { schema });
 const decoder = new TextDecoder("latin1");
 raw
   .bytes()
@@ -32,19 +35,22 @@ raw
             andrekaella: columns[12],
             uppgiftslaemnare: columns[13],
             kommentarer: columns[14],
-          }) as const satisfies Prisma.SlektsnavnCreateInput,
+          }) as const satisfies typeof schema.slektsnavn.$inferInsert,
       )
-      .forEach(async (slektsnavn, i) => {
-        await prisma.slektsnavn.upsert({
-          where: { indeks: slektsnavn.indeks },
-          update: { ...slektsnavn },
-          create: { ...slektsnavn },
-        });
-      });
+      .forEach(
+        async (slektsnavn) =>
+          await db
+            .insert(schema.slektsnavn)
+            .values(slektsnavn)
+            .onConflictDoUpdate({
+              target: schema.slektsnavn.indeks,
+              set: slektsnavn,
+            }),
+      );
   })
-  .then(async () => await prisma.$disconnect())
+  .then(async () => sqlite.close())
   .catch(async (e) => {
     console.error(e);
-    await prisma.$disconnect();
+    sqlite.close();
     process.exit(1);
   });

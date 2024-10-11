@@ -1,24 +1,4 @@
-import {
-  sqliteTable,
-  AnySQLiteColumn,
-  text,
-  numeric,
-  integer,
-} from "drizzle-orm/sqlite-core";
-import { sql } from "drizzle-orm";
-
-export const prismaMigrations = sqliteTable("_prisma_migrations", {
-  id: text("id").primaryKey().notNull(),
-  checksum: text("checksum").notNull(),
-  finishedAt: numeric("finished_at"),
-  migrationName: text("migration_name").notNull(),
-  logs: text("logs"),
-  rolledBackAt: numeric("rolled_back_at"),
-  startedAt: numeric("started_at")
-    .default(sql`(current_timestamp)`)
-    .notNull(),
-  appliedStepsCount: integer("applied_steps_count").default(0).notNull(),
-});
+import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 
 export const slektsnavn = sqliteTable("Slektsnavn", {
   indeks: integer("indeks").primaryKey({ autoIncrement: true }).notNull(),
