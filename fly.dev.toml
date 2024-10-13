@@ -1,10 +1,12 @@
-# fly.toml app configuration file generated for slektsnavn on 2024-10-13T21:44:44+02:00
+# fly.toml app configuration file generated for slektsnavndb on 2024-10-12T03:20:02Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'slektsnavn'
+app = 'slektsnavndb'
 primary_region = 'arn'
+
+[build]
 
 [http_service]
   internal_port = 3000
