@@ -5,7 +5,9 @@ import * as schema from "./schema";
 if (import.meta.main) main();
 
 function main() {
-  const csv = Bun.file(`${import.meta.dir}/../slektsnavnsbasen-20120726.csv`);
+  const csv = Bun.file(
+    `${import.meta.dir}/../database/slektsnavnsbasen-20120726.csv`,
+  );
 
   const sqlite = new Database(import.meta.env.DB_FILE_NAME);
   const db = drizzle(sqlite, { schema });
