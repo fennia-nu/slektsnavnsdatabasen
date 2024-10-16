@@ -67,17 +67,12 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          outputs: type=local,dest=sndb/latest
 
       - name: Install Fly CLI
         uses: superfly/flyctl-actions/setup-flyctl@master
 
       - name: Deploy to Fly.io dev app
-        run: |
-          echo "$IMAGE_ID"
-          echo "${IMAGE_ID}"
-          echo "${{ env.IMAGE_ID }}"
-          echo "${{ steps.build-and-push.outputs.imageid }}"
-        # run: flyctl deploy --config fly.dev.toml --image "$IMAGE_ID"
+        run: flyctl deploy --config fly.dev.toml --image sndb/latest
         env:
-          IMAGE_ID: ${{ steps.build-and-push.outputs.imageid }}
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN_DEV }}
