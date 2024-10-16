@@ -31,7 +31,7 @@ jobs:
       - name: Download database raw source
         run: |
           mkdir database
-          echo ${{ secrets.SLEKTSNAVN_CSV }} > database/slektsnavnsbasen-20120726.csv
+          echo "${{ secrets.SLEKTSNAVN_CSV }}" > database/slektsnavnsbasen-20120726.csv
 
       # Set up BuildKit Docker container builder to be able to build
       # multi-platform images and export cache
